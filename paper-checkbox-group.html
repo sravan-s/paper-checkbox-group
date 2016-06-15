@@ -1,0 +1,103 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-checkbox/paper-checkbox.html">
+
+<dom-module id="paper-checkbox-group">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <template is="dom-repeat" items="[[ items ]]">
+      <paper-checkbox on-iron-change="_setValue" name="[[item.id]]" checked="{{item.checked}}">[[ item.label ]]</paper-checkbox>
+    </template>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'paper-checkbox-group',
+
+      properties: {
+        items: {
+          type: Array,
+          value: [{
+            id: 'Sunday',
+            label: 'Sunday',
+            checked: false
+          }, {
+            id: 'Monday',
+            label: 'Monday',
+            checked: false
+          }, {
+            id: 'Tuesday',
+            label: 'Tuesday',
+            checked: false
+          }, {
+            id: 'Wednesday',
+            label: 'Wednesday',
+            checked: false
+          }, {
+            id: 'Thursday',
+            label: 'Thursday',
+            checked: false
+          }, {
+            id: 'Friday',
+            label: 'Friday',
+            checked: false
+          }, {
+            id: 'Saturday',
+            label: 'Saturday',
+            checked: false
+          }]
+        },
+        value: {
+          type: Array,
+          notify: true,
+          value: []
+        },
+        valChane: {
+          type: Boolean,
+          value: false
+        }
+      },
+
+      observers: ['_valueChange(value)'],
+
+      _setValue: function(e) {
+        if(e.target.checked) {
+          if(this.value.indexOf(e.target.name) == -1) {
+            this.push('value', e.target.name);
+          }
+        } else {
+          this._removeAttrFromValue(this.value, e.target.name);
+        }
+      },
+
+      _removeAttrFromValue: function(arr, elem) {
+        var index = arr.indexOf(elem);
+        if(index == -1) {
+          return;
+        }
+        this.splice('value', index, 1);
+      },
+
+      _valueChange: function(val) {
+        if(!!val && val.length > 0) {
+          this.debounce('arrChange', function() {
+            var chkBoxes = Polymer.dom(this.root).querySelectorAll('paper-checkbox');
+            if(chkBoxes.length > 0 && !!val) {
+              for( i = 0; i < val.length; i++) {
+                chkBoxes.forEach(function(chkBox) {
+                  if(chkBox.name === val[i]) {
+                    chkBox.checked = true;
+                  }
+                });
+              }
+            }
+          }, 200);
+        }
+      }
+    });
+  </script>
+</dom-module>
