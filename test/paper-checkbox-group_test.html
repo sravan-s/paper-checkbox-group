@@ -19,20 +19,28 @@
     </test-fixture>
 
     <script>
-      document.querySelector('paper-checkbox-group').items = [{
-        label: 'abc',
-        value: '1'
-      }, {
-        label: 'pqr',
-        value: '2'
-      }, {
-        label: 'uvw',
-        value: '3'
-      }];
-      suite('<paper-checkbox-group>', function() {
-        var chkboxGrp;
-        test('is visible', function() {
-          assert.isTrue(document.querySelector('paper-checkbox-group').value);
+//      document.querySelector('paper-checkbox-group').items = [{
+//        label: 'abc',
+//        value: '1'
+//      }, {
+//        label: 'pqr',
+//        value: '2'
+//      }, {
+//        label: 'uvw',
+//        value: '3'
+//      }];
+      describe('<paper-checkbox-group>', function() {
+        var wrap, chkboxGrp;
+        
+        beforeEach(function() {
+          wrap = fixture('basic');
+          chkboxGrp = Polymer.dom(wrap.root).querySelector('paper-checkbox-group');
+        });
+        
+        context('booting tests', function() {
+          it('should be booted', function() {
+            expect(chkboxGrp);
+          });
         });
       });
     </script>
