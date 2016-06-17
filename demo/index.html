@@ -24,8 +24,19 @@
         </template>
       </demo-snippet>
       <paper-checkbox-group></paper-checkbox-group>
+      <paper-checkbox-group id="two" label-as="l" value-as="v"></paper-checkbox-group>
     </div>
     <script>
+      document.querySelector('#two').items = [{
+        l: 'Option1',
+        v: 'Val'
+      }, {
+        l: 'Option2',
+        v: 'Val2'
+      }, {
+        l: 'Option3',
+        v: 'Val3'
+      }];
       document.querySelector('paper-checkbox-group').items = [{
         id: 'Sunday',
         label: 'Sunday',

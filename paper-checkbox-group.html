@@ -34,18 +34,24 @@
           type: String,
           value: 'label'
         },
-        ValueAs: {
+        valueAs: {
           type: String,
           value: 'id'
         }
       },
 
-      observers: ['_valueChange(value)', '_allParamsChange(items)'],
+      observers: ['_valueChange(value)', '_allParamsChange(items)', '_labelChanged(labelAs)'],
 
+      _labelChanged: function(labelAs) {
+        console.log(labelAs);  
+      },
+      
+      
       _allParamsChange: function(items) {
         this._map(items);
       },
 
+      
       _setValue: function(e) {
         if(e.target.checked) {
           if(this.value.indexOf(e.target.name) == -1) {
@@ -87,7 +93,7 @@
         var me = this;
         _mapped = items.map(function(item) {
           item.label = item[me.labelAs];
-          item.value = item[me.ValueAs];
+          item.id = item[me.valueAs];
           return item;
         });
         me.set('_mappedItems', _mapped);
