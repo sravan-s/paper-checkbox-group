@@ -8,8 +8,8 @@
         display: block;
       }
     </style>
-    <template is="dom-repeat" items="[[ items ]]">
-      <paper-checkbox on-iron-change="_setValue" name="[[item.id]]" checked="{{item.checked}}">[[ item.label ]]</paper-checkbox>
+    <template is="dom-repeat" items="[[ _mappedItems ]]">
+      <paper-checkbox on-iron-change="_setValue" name="[[item.id]]">[[ item.label ]]</paper-checkbox>
     </template>
   </template>
 
@@ -20,49 +20,31 @@
 
       properties: {
         items: {
-          type: Array,
-          value: [{
-            id: 'Sunday',
-            label: 'Sunday',
-            checked: false
-          }, {
-            id: 'Monday',
-            label: 'Monday',
-            checked: false
-          }, {
-            id: 'Tuesday',
-            label: 'Tuesday',
-            checked: false
-          }, {
-            id: 'Wednesday',
-            label: 'Wednesday',
-            checked: false
-          }, {
-            id: 'Thursday',
-            label: 'Thursday',
-            checked: false
-          }, {
-            id: 'Friday',
-            label: 'Friday',
-            checked: false
-          }, {
-            id: 'Saturday',
-            label: 'Saturday',
-            checked: false
-          }]
+          type: Array
         },
         value: {
           type: Array,
           notify: true,
           value: []
         },
-        valChane: {
-          type: Boolean,
-          value: false
+        _mappedItems: {
+          type: Array
+        },
+        labelAs: {
+          type: String,
+          value: 'label'
+        },
+        ValueAs: {
+          type: String,
+          value: 'id'
         }
       },
 
-      observers: ['_valueChange(value)'],
+      observers: ['_valueChange(value)', '_allParamsChange(items)'],
+
+      _allParamsChange: function(items) {
+        this._map(items);
+      },
 
       _setValue: function(e) {
         if(e.target.checked) {
@@ -97,7 +79,20 @@
             }
           }, 200);
         }
+      },
+
+
+      _map: function(items) {
+        var _mapped = [];
+        var me = this;
+        _mapped = items.map(function(item) {
+          item.label = item[me.labelAs];
+          item.value = item[me.ValueAs];
+          return item;
+        });
+        me.set('_mappedItems', _mapped);
       }
+
     });
   </script>
 </dom-module>

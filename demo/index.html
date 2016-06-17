@@ -20,12 +20,41 @@
       <h3>Basic paper-checkbox-group Demo</h3>
       <demo-snippet>
         <template>
-          <paper-checkbox-group items="[[arr]]"></paper-checkbox-group>
+          <paper-checkbox-group></paper-checkbox-group>
         </template>
       </demo-snippet>
       <paper-checkbox-group></paper-checkbox-group>
     </div>
     <script>
+      document.querySelector('paper-checkbox-group').items = [{
+        id: 'Sunday',
+        label: 'Sunday',
+        checked: false
+      }, {
+        id: 'Monday',
+        label: 'Monday',
+        checked: false
+      }, {
+        id: 'Tuesday',
+        label: 'Tuesday',
+        checked: false
+      }, {
+        id: 'Wednesday',
+        label: 'Wednesday',
+        checked: false
+      }, {
+        id: 'Thursday',
+        label: 'Thursday',
+        checked: false
+      }, {
+        id: 'Friday',
+        label: 'Friday',
+        checked: false
+      }, {
+        id: 'Saturday',
+        label: 'Saturday',
+        checked: false
+      }];
       document.querySelector('paper-checkbox-group').value = ['Sunday', 'Monday'];
     </script>
   </body>
