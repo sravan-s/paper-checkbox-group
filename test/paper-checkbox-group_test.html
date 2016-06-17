@@ -19,13 +19,21 @@
     </test-fixture>
 
     <script>
-      suite('paper-checkbox-group', function() {
-
-        test('instantiating the element works', function() {
-          let element = fixture('basic');
-          assert.equal(element.is, 'paper-checkbox-group');
+      document.querySelector('paper-checkbox-group').items = [{
+        label: 'abc',
+        value: '1'
+      }, {
+        label: 'pqr',
+        value: '2'
+      }, {
+        label: 'uvw',
+        value: '3'
+      }];
+      suite('<paper-checkbox-group>', function() {
+        var chkboxGrp;
+        test('is visible', function() {
+          assert.isTrue(document.querySelector('paper-checkbox-group').value);
         });
-
       });
     </script>
   </body>
