@@ -1,6 +1,6 @@
 # \<paper-checkbox-group\>
 
-same as paper radio group
+A checkbox group in the style of polymer paper check box. Pass an array as 'items' attribute to build the group and strore the value in atribute 'value'.
 
 ## Install the Polymer-CLI
 
@@ -36,3 +36,14 @@ $ polymer test
 ```
 
 Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
+
+### Done
+Add array as parameter.
+Return value in attribute.
+Make input array configurable.
+
+### To Do
+Tests
+Error messsage on empty selection.
+Only allow to select a single checkbox.
+Disable specific checkboxes.
